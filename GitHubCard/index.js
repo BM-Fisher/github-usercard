@@ -58,8 +58,11 @@ const followersArray = [];
     </div>
 */
 // parent element to append
+const cards = document.querySelector(".cards");
+console.log('Cards Class:', cards)
+// cards.appendChild(cardComponent(response))
 
-function cardComponent(data){
+function cardComponent(response){
   // create elements
   const card = document.createElement('div')
   const img =  document.createElement('img')
@@ -72,8 +75,19 @@ function cardComponent(data){
   const followers = document.createElement('p')
   const following = document.createElement('p')
   const bio = document.createElement('p')
-  // structure elements
 
+  // structure elements
+  card.appendChild(img)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(name)
+  cardInfo.appendChild(username)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profile)
+  cardInfo.appendChild(profileLink)
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(following)
+  cardInfo.appendChild(bio)
+  
   // add classes
 
   // add content
