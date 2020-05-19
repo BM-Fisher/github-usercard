@@ -39,7 +39,25 @@ axios.get('https://api.github.com/users/BM-Fisher')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [ 
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'
+];
+
+followersArray.forEach(user => {
+  axios.get(`https://api.github.com/users/${user}`)
+  .then( response => {
+    console.log('User Response Success:', response)
+    const cards =  document.querySelector('.cards')
+    cards.appendChild(cardComponent(response))
+  })
+  .catch(error => {
+    console.log('User Response FAILED', error)
+  })
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -89,7 +107,7 @@ function cardComponent(response){
   // profile.appendChild(profileLink)
   // makes link disappear unsure why so attached to card info to render
   cardInfo.appendChild(profileLink)
-  
+
   cardInfo.appendChild(followers)
   cardInfo.appendChild(following)
   cardInfo.appendChild(bio)
