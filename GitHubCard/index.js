@@ -8,6 +8,9 @@
 axios.get('https://api.github.com/users/BM-Fisher')
   .then(response =>{
     console.log('Github Response Successful:', response)
+    const cards = document.querySelector(".cards");
+    cards.appendChild(cardComponent(response))
+    console.log('Cards Class:', cards)  
   })
   .catch(error => {
     console.log('Github Response FAILED:', error)
@@ -58,9 +61,8 @@ const followersArray = [];
     </div>
 */
 // parent element to append
-const cards = document.querySelector(".cards");
-console.log('Cards Class:', cards)
-// cards.appendChild(cardComponent(response))
+
+
 
 function cardComponent(response){
   // create elements
@@ -83,7 +85,11 @@ function cardComponent(response){
   cardInfo.appendChild(username)
   cardInfo.appendChild(location)
   cardInfo.appendChild(profile)
+
+  // profile.appendChild(profileLink)
+  // makes link disappear unsure why so attached to card info to render
   cardInfo.appendChild(profileLink)
+  
   cardInfo.appendChild(followers)
   cardInfo.appendChild(following)
   cardInfo.appendChild(bio)
@@ -99,7 +105,7 @@ function cardComponent(response){
   name.textContent = response.data.name
   username.textContent = response.data.login
   location.textContent = `Location: ${response.data.location}`
-  profile.textContent = 'Profile: '
+  profile.textContent = 'Profile:'
   profileLink.textContent = response.data.html_url
   profileLink.setAttribute('href', response.data.html_url)
   profileLink.setAttribute('target', '_blank')
