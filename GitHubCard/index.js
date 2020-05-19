@@ -4,6 +4,14 @@
     https://api.github.com/users/<your name>
 */
 
+
+axios.get('https://api.github.com/users/BM-Fisher')
+  .then(response =>{
+    console.log('Github Response Successful:', response)
+  })
+  .catch(error => {
+    console.log('Github Response FAILED:', error)
+  })
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -49,7 +57,29 @@ const followersArray = [];
       </div>
     </div>
 */
+// parent element to append
 
+function cardComponent(data){
+  // create elements
+  const card = document.createElement('div')
+  const img =  document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const name = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const profileLink = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+  // structure elements
+
+  // add classes
+
+  // add content
+
+  return
+}
 /*
   List of LS Instructors Github username's:
     tetondan
