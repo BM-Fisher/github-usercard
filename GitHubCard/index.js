@@ -89,10 +89,25 @@ function cardComponent(response){
   cardInfo.appendChild(bio)
   
   // add classes
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  name.classList.add('name')
+  username.classList.add('username')
 
   // add content
+  img.src = response.data.avatar_url
+  name.textContent = response.data.name
+  username.textContent = response.data.login
+  location.textContent = `Location: ${response.data.location}`
+  profile.textContent = 'Profile: '
+  profileLink.textContent = response.data.html_url
+  profileLink.setAttribute('href', response.data.html_url)
+  profileLink.setAttribute('target', '_blank')
+  followers.textContent = `Followers: ${response.data.followers}`
+  following.textContent = `Following: ${response.data.following}`
+  bio.textContent = response.data.bio
 
-  return
+  return card
 }
 /*
   List of LS Instructors Github username's:
