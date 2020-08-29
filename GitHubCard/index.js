@@ -4,6 +4,17 @@
     https://api.github.com/users/<your name>
 */
 
+
+axios.get('https://api.github.com/users/BM-Fisher')
+  .then(response =>{
+    console.log('Github Response Successful:', response)
+    const cards = document.querySelector(".cards");
+    cards.appendChild(cardComponent(response))
+    console.log('Cards Class:', cards)  
+  })
+  .catch(error => {
+    console.log('Github Response FAILED:', error)
+  })
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -28,7 +39,25 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [ 
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'
+];
+
+followersArray.forEach(user => {
+  axios.get(`https://api.github.com/users/${user}`)
+  .then( response => {
+    console.log('User Response Success:', response)
+    const cards =  document.querySelector('.cards')
+    cards.appendChild(cardComponent(response))
+  })
+  .catch(error => {
+    console.log('User Response FAILED', error)
+  })
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -49,7 +78,61 @@ const followersArray = [];
       </div>
     </div>
 */
+// parent element to append
 
+
+
+function cardComponent(response){
+  // create elements
+  const card = document.createElement('div')
+  const img =  document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const name = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const profileLink = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  // structure elements
+  card.appendChild(img)
+  card.appendChild(cardInfo)
+  cardInfo.appendChild(name)
+  cardInfo.appendChild(username)
+  cardInfo.appendChild(location)
+  cardInfo.appendChild(profile)
+
+  // profile.appendChild(profileLink)
+  // makes link disappear unsure why so attached to card info to render
+  cardInfo.appendChild(profileLink)
+
+  cardInfo.appendChild(followers)
+  cardInfo.appendChild(following)
+  cardInfo.appendChild(bio)
+  
+  // add classes
+  card.classList.add('card')
+  cardInfo.classList.add('card-info')
+  name.classList.add('name')
+  username.classList.add('username')
+
+  // add content
+  img.src = response.data.avatar_url
+  name.textContent = response.data.name
+  username.textContent = response.data.login
+  location.textContent = `Location: ${response.data.location}`
+  profile.textContent = 'Profile:'
+  profileLink.textContent = response.data.html_url
+  profileLink.setAttribute('href', response.data.html_url)
+  profileLink.setAttribute('target', '_blank')
+  followers.textContent = `Followers: ${response.data.followers}`
+  following.textContent = `Following: ${response.data.following}`
+  bio.textContent = response.data.bio
+
+  return card
+}
 /*
   List of LS Instructors Github username's:
     tetondan
